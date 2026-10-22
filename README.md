@@ -12,7 +12,7 @@ Short answer: likely yes, but only after Visa's recovery targets are checked aga
 
 ## 2. The target architecture
 
-![CSP-hosted TFE target architecture](architecture.png)
+![CSP-hosted TFE target architecture](images/architecture-visa.png)
 
 Two TFE nodes run active-active in separate availability zones behind a load balancer. The managed PostgreSQL database has a standby in a second zone that takes over automatically. TFE agents inside Visa's network connect outward over HTTPS, so the cloud side never needs inbound access.
 
