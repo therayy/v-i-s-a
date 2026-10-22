@@ -12,29 +12,9 @@ Short answer: likely yes, but only after Visa's recovery targets are checked aga
 
 ## 2. The target architecture
 
-```
-                     Users / CI / API
-                            |
-                  [ Load balancer (HTTPS) ]
-                    /                  \
-         [ TFE node A ]           [ TFE node B ]      (active-active, 2+ availability zones)
-                    \                  /
-                     \                /
-    +------------------------------------------------+
-    |  Managed PostgreSQL                            |  <- TFE metadata
-    |  (multi-AZ, automatic failover, backups)       |
-    +------------------------------------------------+
-    |  Object storage (S3 / Azure Blob / GCS)        |  <- state files, plans, logs
-    +------------------------------------------------+
-    |  Managed Redis                                 |  <- cache and coordination
-    +------------------------------------------------+
+![CSP-hosted TFE target architecture](architecture.png)
 
-    [ TFE agents ] inside Visa's on-prem network
-          |  outbound HTTPS only
-          +----------> TFE (cloud)
-          |
-          +----------> on-prem targets (VMware, networks, APIs)
-```
+Two TFE nodes run active-active in separate availability zones behind a load balancer. The managed PostgreSQL database has a standby in a second zone that takes over automatically. TFE agents inside Visa's network connect outward over HTTPS, so the cloud side never needs inbound access.
 
 ### Components in plain terms
 
