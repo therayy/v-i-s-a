@@ -63,7 +63,7 @@ Connectivity to the database (endpoints, DNS, connection pooling) is customer-ma
 7. **Cut over DNS.** Switch the TFE hostname to the cloud load balancer.
 8. **Run both in parallel for a period**, then retire the on-prem VMs.
 
-Plan the migration with HashiCorp's migration documentation and a support engagement. Test the restore at least once before the cutover date.
+Plan the migration with HashiCorp's migration documentation and a services engagement. Test the restore at least once before the cutover date.
 
 ## 7. Managing on-prem infrastructure from the cloud
 
